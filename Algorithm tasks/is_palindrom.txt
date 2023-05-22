@@ -1,0 +1,21 @@
+def is_palindrome(string: str) -> bool:
+    string = string.lower()
+    start = 0
+    end = len(string) - 1
+    while start < end:
+        while start < end and not string[start].isalnum():
+            start += 1
+        while start < end and not string[end].isalnum():
+            end -= 1
+        if string[start] != string[end]:
+            return False
+        start += 1
+        end -= 1
+    return True
+
+
+assert True == is_palindrome('as!s..,!a')
+assert False == is_palindrome('as!!ss')
+assert False == is_palindrome('!1212!')
+assert True == is_palindrome('')
+assert True == is_palindrome('a')

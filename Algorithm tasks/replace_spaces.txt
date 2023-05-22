@@ -1,0 +1,26 @@
+import typing as tp
+
+
+def replace_space_with_percent20(s: list[tp.Union[str, None]]) -> None:
+    left = 0
+    right = len(s) - 1
+    while left < len(s) and s[left] is not None:
+        left += 1
+    left -= 1
+    while left >= 0:
+        if s[left] == ' ':
+            s[right] = '0'
+            s[right - 1] = '2'
+            s[right - 2] = '%'
+            right -= 3
+        else:
+            s[right] = s[left]
+            right -= 1
+        left -= 1
+
+a = [2, ' ', 3, 9, ' ', None, None, None, None]
+replace_space_with_percent20(a)
+assert a == [2, '%', '2', '0', 3, 9, '%', '2', '0']
+b = [' ', ' ', 32, 1, ' ', None, None, None, None, None, None]
+replace_space_with_percent20(b)
+assert b == ['%', '2', '0', '%', '2', '0', 32, 1, '%', '2', '0']
