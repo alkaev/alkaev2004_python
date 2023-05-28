@@ -1,0 +1,22 @@
+
+def RLE(data):
+    rle_data = ""
+    count = 1
+    prev_char = ""
+    for char in data:
+        if char == prev_char:
+            count += 1
+        else:
+            if prev_char:
+                rle_data += str(count) + prev_char
+            count = 1
+            prev_char = char
+    rle_data += str(count) + prev_char
+
+    return rle_data
+
+
+a = RLE('aaasssass')
+assert a == '3a3s1a2s'
+b = RLE('sddddsssdswwe')
+assert b == '1s4d3s1d1s2w1e'

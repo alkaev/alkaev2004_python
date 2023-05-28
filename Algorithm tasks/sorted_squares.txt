@@ -1,0 +1,32 @@
+def sorted_squared_array(nums):
+    n = len(nums)
+    ans = [0] * n
+    left = 0
+    right = n - 1
+    i = n - 1
+
+    while left <= right:
+        left_square = nums[left] ** 2
+        right_square = nums[right] ** 2
+
+        if left_square > right_square:
+            ans[i] = left_square
+            left += 1
+        else:
+            ans[i] = right_square
+            right -= 1
+
+        i -= 1
+
+    return ans
+
+
+a = [-4, -2, 0, 2, 4]
+a1 = sorted_squared_array(a)
+assert a1 == [0, 4, 4, 16, 16]
+b = [-3, -2, -1]
+b1 = sorted_squared_array(b)
+assert b1 == [1, 4, 9]
+c = [0, 1, 2]
+c1 = sorted_squared_array(c)
+assert c1 == [0, 1, 4]
