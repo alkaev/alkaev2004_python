@@ -1,0 +1,39 @@
+def distance_one(line1: str, line2: str):
+    if abs(len(line1) - len(line2)) > 1:
+        return False
+    if len(line1) == len(line2):
+        mis = 0
+        for i in range(len(line1)):
+            if line1[i] != line2[i]:
+                mis += 1
+        if mis > 1:
+            return False
+        return True
+    if len(line1) > len(line2):
+        mis = 0
+        i = 0
+        while i < len(line2):
+            if line1[i] != line2[i]:
+                while i < len(line2):
+                    if line1[i + 1] != line2[i]:
+                        return False
+                    i += 1
+            i += 1
+        return True
+    if len(line2) > len(line1):
+        mis = 0
+        i = 0
+        while i < len(line1):
+            if line2[i] != line1[i]:
+                while i < len(line1):
+                    if line2[i + 1] != line1[i]:
+                        return False
+                    i += 1
+            i += 1
+        return True
+
+
+assert distance_one('aaas', 'aaa')
+assert False == distance_one('abcd', 'aacc')
+assert distance_one('abcd', 'abed')
+assert False == distance_one('aaa', 'a')

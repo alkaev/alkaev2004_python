@@ -1,0 +1,17 @@
+def count_substrings_without_repeating(string):
+    n = len(string)
+    visited = {}
+    count = 0
+    i = 0
+    for j in range(n):
+        if string[j] in visited:
+            i = max(i, visited[string[j]] + 1)
+
+        visited[string[j]] = j
+        count += j - i + 1
+    return count
+
+
+assert 10 == count_substrings_without_repeating('abcd')
+assert 14 == count_substrings_without_repeating('abcaba')
+assert 5 == count_substrings_without_repeating('aba')

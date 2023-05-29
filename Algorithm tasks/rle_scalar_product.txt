@@ -1,0 +1,38 @@
+def scalar_product_rle(rle_vector1, rle_vector2):
+    scalar_product = 0
+    i, j = 0, 0
+    element1, count1 = rle_vector1[i][1], rle_vector1[i][0]
+    element2, count2 = rle_vector2[j][1], rle_vector2[j][0]
+    while i < len(rle_vector1) and j < len(rle_vector2):
+        if count1 == count2:
+            scalar_product += (element2 * element1 * count2)
+            i += 1
+            j += 1
+            if i == len(rle_vector1) or j == len(rle_vector2):
+                return scalar_product
+            else:
+                count1 = rle_vector1[i][0]
+                count2 = rle_vector2[j][0]
+                element1 = rle_vector1[i][1]
+                element2 = rle_vector2[j][1]
+        elif count1 > count2:
+            scalar_product += element2 * element1 * count2
+            j += 1
+            count1 -= count2
+            if j < len(rle_vector2):
+                count2 = rle_vector2[j][0]
+                element2 = rle_vector2[j][1]
+        else:
+            scalar_product += element2 * element1 * count1
+            i += 1
+            count2 -= count1
+            if i < len(rle_vector1):
+                count1 = rle_vector1[i][0]
+                element1 = rle_vector1[i][1]
+    return scalar_product
+
+
+a = scalar_product_rle([(2, 3), (4, 2), (1, 4)], [(2, 2), (1, 3), (4, 1)])
+assert a == 28
+b = scalar_product_rle([(5, 3), (1, 0), (23, 4)], [(3, 10), (2, -5)])
+assert b == 60
